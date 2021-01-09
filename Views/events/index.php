@@ -1,60 +1,44 @@
-<?php
-$start = $calendar->getStartingDay();
-$start = $start->format('N') === '1' ? $start : $calendar->getStartingDay()->modify('last monday');
-$weeks = $calendar->getWeeks();
+<?php $_SESSION['redirect'] = '/events/index'; ?>
 
-if (isset($_GET) && !empty($_GET)) {
-    $_SESSION['redirect'] = '/' . $_GET['p'];
-}
-?>
-
-<section id="calendar" class="container">
+<section id="events" class="container">
     <div class="row">
         <div class="col-sm-12 my-auto px-0">
             <div class="d-flex flex-row align-items-center justify-content-between mx-2">
-                <h5><?= $calendar->toString() ?></h5>
+                <h5>Liste des évènements</h5>
                 <div>
-                    <a href="/calendar/index/<?= $calendar->previousSixMonth()->month; ?>/<?= $calendar->previousSixMonth()->year; ?>" class="btn btn-outline-dark btn-sm mx-1" role="button"><i class="fas fa-arrow-circle-left"></i></a>
-                    <a href="/calendar/index/<?= $calendar->previousMonth()->month; ?>/<?= $calendar->previousMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-left"></i></a>
-                    <a href="/calendar/index/<?= $calendar->nextMonth()->month; ?>/<?= $calendar->nextMonth()->year; ?>" class="btn btn-outline-dark btn-sm mx-1" role="button"><i class="fas fa-arrow-right"></i></a>
-                    <a href="/calendar/index/<?= $calendar->nextSixMonth()->month; ?>/<?= $calendar->nextSixMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-circle-right"></i></a>
-                    <a href="/Events/index" class="btn btn-dark btn-sm mx-2" role="button" title="Vue Liste"><i class="fas fa-list"></i></a>
+                    <a href="/calendar/index" class="btn btn-dark btn-sm mx-2" role="button" title="Vue Calendar"><i class="far fa-calendar"></i></a>
                     <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#ajoutEvent" title="Ajouter un Evènement"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
-            <table class="calendar_table calendar_table--<?= $weeks; ?>weeks my-3">
-                <?php for ($i = 0; $i < $weeks; $i++) : ?>
+
+            <table class="table table-sm table-hover">
+                <thead>
                     <tr>
-                        <?php foreach ($calendar->days as $k => $day) :
-                            $date = $start->modify("+" . ($k + $i * 7) . "days");
-                            $eventsForDay = $eventListByDay[$date->format('Y-m-d')] ?? [];
-                        ?>
-                            <td class="<?= $calendar->withinMonth($date) ? '' : 'calendar_othermonth'; ?> <?= $calendar->currentDay($date) ? 'calendar_today' : ''; ?> ">
-                                <?php if ($i === 0) : ?>
-                                    <div class="calendar_weekday fw-bold"><?= $day; ?></div>
-                                <?php endif; ?>
-                                <div class="calendar_day fw-bold"><?= $date->format('d'); ?></div>
-                                <?php foreach ($eventsForDay as $event) : ?>
-                                    <div class="calendar_event" style="background-color: <?= $event->color ?>;">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#modifyEvent" data-bs-idModify="<?= $event->id ?>" data-bs-subjectModify="<?= $event->title ?>" data-bs-descriptionModify="<?= $event->description ?>" data-bs-locationModify="<?= $event->location ?>" data-bs-dateModify="<?= strftime('%x', strtotime($event->date)) ?>" data-bs-hourModify="<?= strftime('%R', strtotime($event->date)) ?>">
-                                            <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<b><?= strftime('%x %R', strtotime($event->date)) ?></b><br><b><?= $event->title; ?></b><br><b>Lieu:</b> <?= $event->location ?> <br> <b>Description:</b> <?= $event->description ?>">
-                                                <?= (new DateTime($event->date))->format('H:i') ?>&ensp;<?= $event->title; ?>
-                                            </span>
-                                        </a>
-                                    </div>
-                                <?php endforeach; ?>
-                            </td>
-                        <?php endforeach; ?>
+                        <th scope="col">Edition / Titre</th>
+                        <th scope="col">Date / Heure</th>
+                        <th scope="col">Lieu</th>
                     </tr>
-                <?php endfor; ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($eventsList as $event) : ?>
+                        <tr style="background-color: <?= $event->color ?>;">
+                            <td>
+                                <a href="" class="btn btn-outline-dark btn-xs mx-2" data-bs-toggle="modal" data-bs-target="#modifyEvent" data-bs-idModify="<?= $event->id ?>" data-bs-subjectModify="<?= $event->title ?>" data-bs-descriptionModify="<?= $event->description ?>" data-bs-locationModify="<?= $event->location ?>" data-bs-dateModify="<?= strftime('%x', strtotime($event->date)) ?>" data-bs-hourModify="<?= strftime('%R', strtotime($event->date)) ?>">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <?= $event->title; ?>
+                            </td>
+                            <td><?= strftime('%x %R', strtotime($event->date)) ?></td>
+                            <td><?= $event->location; ?></td>
+                        </tr>
+                        <tr style="background-color: <?= $event->color ?>;">
+                            <td colspan="3">
+                                <span class="ms-5 fw-bold">Description:</span> <?= $event->description; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
-        </div>
-        <div class="row my-3">
-            <div class="col-sm-10">
-                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
-                    <p class="text-danger fw-bold"><?= $_SESSION['error'] ?></p>
-                <?php endif; ?>
-            </div>
         </div>
     </div>
 

@@ -3,6 +3,10 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
+#events {
+    min-height: calc(100vh - 200px);
+}
+
 
 /* ***** Classes généralistes ***** */
 
@@ -43,6 +47,17 @@ body {
 }
 
 
+/* ***** btn-xs ***** */
+
+.btn-group-xs>.btn,
+.btn-xs {
+    padding: .25rem .25rem;
+    font-size: .875rem;
+    line-height: .5;
+    border-radius: .2rem;
+}
+
+
 /* ***** modification de le la checkBox Bootstrap 5 ***** */
 
 .modal-footer .form-check-input:checked {
@@ -55,7 +70,7 @@ body {
 
 .calendar_table {
     width: 100%;
-    height: calc(100vh - 384px);
+    height: calc(100vh - 300px);
 }
 
 .calendar_table td {
@@ -69,7 +84,7 @@ body {
 }
 
 .calendar_table td:hover {
-    background-color: #AAA;
+    background-color: #DDD;
 }
 
 .calendar_table.calendar_table--6weeks td {

@@ -6,6 +6,16 @@ use RBCalendar\Models\EventsModel;
 
 class EventsController extends Controller
 {
+
+    public function index()
+    {
+        $eventsModel = new EventsModel;
+        $eventsList = $eventsModel->findAll();
+        $this->render('events/index', compact('eventsList'));
+        exit;
+    }
+
+
     /**
      * Ajouter un évènement
      *
@@ -47,6 +57,10 @@ class EventsController extends Controller
                 $event = $eventsModel->hydrate($donnees);
                 $event->create($event);
                 unset($_SESSION['error']);
+                if (isset($_SESSION['redirect']) && !empty($_SESSION['redirect'])){
+                    header('location: ' . $_SESSION['redirect']);
+                    exit;
+                }
                 header('location: /calendar/index/' . $dateTemp[1] . '/' . $dateTemp[2]);
                 exit;
             }

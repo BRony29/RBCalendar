@@ -14,17 +14,15 @@
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <?= $header ?>
-        </header>
-        <div>
-            <?= $contenu ?>
-        </div>
-        <footer>
-            <?= $footer ?>
-        </footer>
+    <header>
+        <?= $header ?>
+    </header>
+    <div>
+        <?= $contenu ?>
     </div>
+    <footer>
+        <?= $footer ?>
+    </footer>
 
     <script src="/public/js/script.js"></script>
 

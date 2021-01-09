@@ -1,4 +1,4 @@
-<section id="footer" class="page-footer font-small pt-1">
+<section id="footer" class="container page-footer font-small pt-1">
     <div class="text-center text-md-left">
         <div class="w-100">
             <hr>
