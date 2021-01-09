@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+/* ***** Classes généralistes ***** */
+
+.noresize {
+    resize: none;
+}
+
+.bg-blanc {
+    background-color: #FFFFFF;
+}
+
+.bg-bleu {
+    background-color: #9AEDFF;
+}
+
+.bg-gris {
+    background-color: #BBBBBB;
+}
+
+.bg-jaune {
+    background-color: #FFFFAC;
+}
+
+.bg-rouge {
+    background-color: #FFAC9A;
+}
+
+.bg-rose {
+    background-color: #F2B0EC;
+}
+
+.bg-vert {
+    background-color: #B0F2B6;
+}
+
+.bg-violet {
+    background-color: #ACACFF;
+}
+
+
+/* ***** modification de le la checkBox Bootstrap 5 ***** */
+
+.modal-footer .form-check-input:checked {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+
+/* ***** calendar ***** */
+
+.calendar_table {
+    width: 100%;
+    height: calc(100vh - 384px);
+}
+
+.calendar_table td {
+    padding: 5px;
+    border: 1px solid #000;
+    vertical-align: top;
+    width: 14.29%;
+    height: 20%;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+.calendar_table td:hover {
+    background-color: #AAA;
+}
+
+.calendar_table.calendar_table--6weeks td {
+    height: 16.66%;
+}
+
+.calendar_weekday {
+    font-size: 0.8em;
+}
+
+.calendar_day {
+    font-size: 0.9em;
+}
+
+.calendar_othermonth .calendar_day {
+    opacity: 0.3;
+}
+
+.calendar_event {
+    font-size: 0.6em;
+}
+
+.calendar_event a {
+    color: #000;
+    text-decoration: none;
+}
+
+.calendar_today {
+    background-color: #EEE;
+}
+
+@media screen and (max-device-width: 991.98px) {
+    .calendar_table td {
+        padding: 10px 5px 10px 5px;
+    }
+    .calendar_weekday {
+        font-size: 0.6em;
+    }
+    .calendar_event {
+        font-size: 0.5em;
+    }
+}
+
+@media screen and (max-device-width: 767.98px) {
+    .calendar_weekday {
+        font-size: 0.3em;
+    }
+    .calendar_day {
+        font-size: 0.7em;
+    }
+    .calendar_event {
+        font-size: 0.3em;
+    }
+}
