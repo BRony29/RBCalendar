@@ -9,8 +9,19 @@ class EventsController extends Controller
 
     public function index()
     {
+        if (isset($_GET) && !empty($_GET)) {
+            $params = explode('/', $_GET['p']);
+            if (isset($params[2]) && $params[2] > 1) {
+                $params[2] = intval($params[2]);
+            } else {
+                $params[2] = 1;
+            }
+        }
         $eventsModel = new EventsModel;
-        $eventsList = $eventsModel->findAll();
+        $fullEventsList = $eventsModel->findAllDateDesc();
+        $startList =  10 * $params[2] - 10;
+        $endList = 10 * $params[2];
+        $eventsList = array_slice($fullEventsList, $startList, $endList);
         $this->render('events/index', compact('eventsList'));
         exit;
     }
@@ -32,12 +43,12 @@ class EventsController extends Controller
                 && isset($_POST['location']) && !empty($_POST['location'])
                 && isset($_POST['description']) && !empty($_POST['description'])
             ) {
-                if (!isset($_POST['color'])) {
-                    $color = "#FFFFFF";
-                } elseif (isset($_POST['color']) && empty($_POST['color'])) {
-                    $color = "#FFFFFF";
+                if (!isset($_POST['bg_color'])) {
+                    $bg_color = "#FFFFFF";
+                } elseif (isset($_POST['bg_color']) && empty($_POST['bg_color'])) {
+                    $bg_color = "#FFFFFF";
                 } else {
-                    $color = htmlspecialchars(strip_tags($_POST['color']));
+                    $bg_color = htmlspecialchars(strip_tags($_POST['bg_color']));
                 }
                 $date = htmlspecialchars(strip_tags($_POST['date']));
                 $hour = htmlspecialchars(strip_tags($_POST['hour']));
@@ -52,25 +63,35 @@ class EventsController extends Controller
                     'title' => htmlspecialchars(strip_tags($_POST['title'])),
                     'location' => htmlspecialchars(strip_tags($_POST['location'])),
                     'description' => htmlspecialchars(strip_tags($_POST['description'])),
-                    'color' => $color
+                    'bg_color' => $bg_color
                 ];
                 $event = $eventsModel->hydrate($donnees);
                 $event->create($event);
                 unset($_SESSION['error']);
-                if (isset($_SESSION['redirect']) && !empty($_SESSION['redirect'])){
+                if (isset($_SESSION['redirect']) && !empty($_SESSION['redirect'])) {
                     header('location: ' . $_SESSION['redirect']);
                     exit;
                 }
                 header('location: /calendar/index/' . $dateTemp[1] . '/' . $dateTemp[2]);
                 exit;
             }
-            $_SESSION['error'] = 'Veuillez remplir tous les champs';
+            if (isset($_SESSION['redirect']) && !empty($_SESSION['redirect'])) {
+                $_SESSION['error'] = 'Veuillez remplir tous les champs';
+                header('location: ' . $_SESSION['redirect']);
+                exit;
+            } else {
+                header('location: /calendar/index');
+                exit;
+            }
+        }
+        if (isset($_SESSION['redirect']) && !empty($_SESSION['redirect'])) {
+            $_SESSION['error'] = 'Suite à une erreur, votre nouvel évènement n\'a pas été pris en compte. Veuillez réessayer.';
+            header('location: ' . $_SESSION['redirect']);
+            exit;
+        } else {
             header('location: /calendar/index');
             exit;
         }
-        $_SESSION['error'] = 'Suite à une erreur, votre nouvel évènement n\'a pas été pris en compte. Veuillez réessayer.';
-        header('location: /calendar/index');
-        exit;
     }
 
 
@@ -129,12 +150,12 @@ class EventsController extends Controller
                         header('location: /calendar/index');
                         exit;
                     }
-                    if (!isset($_POST['color'])) {
-                        $color = "#FFFFFF";
-                    } elseif (isset($_POST['color']) && empty($_POST['color'])) {
-                        $color = "#FFFFFF";
+                    if (!isset($_POST['bg_color'])) {
+                        $bg_color = "#FFFFFF";
+                    } elseif (isset($_POST['bg_color']) && empty($_POST['bg_color'])) {
+                        $bg_color = "#FFFFFF";
                     } else {
-                        $color = htmlspecialchars(strip_tags($_POST['color']));
+                        $bg_color = htmlspecialchars(strip_tags($_POST['bg_color']));
                     }
                     $date = htmlspecialchars(strip_tags($_POST['date']));
                     $hour = htmlspecialchars(strip_tags($_POST['hour']));
@@ -148,7 +169,7 @@ class EventsController extends Controller
                         'title' => htmlspecialchars(strip_tags($_POST['title'])),
                         'location' => htmlspecialchars(strip_tags($_POST['location'])),
                         'description' => htmlspecialchars(strip_tags($_POST['description'])),
-                        'color' => $color
+                        'bg_color' => $bg_color
                     ];
                     $eventsModel = new EventsModel;
                     $evenement = $eventsModel->hydrate($donnees);

@@ -12,13 +12,13 @@ if (isset($_GET) && !empty($_GET)) {
     <div class="row">
         <div class="col-sm-12 my-auto px-0">
             <div class="d-flex flex-row align-items-center justify-content-between mx-2">
-                <h5><?= $calendar->toString() ?></h5>
+                <h5 class="fw-bold"><?= $calendar->toString() ?></h5>
                 <div>
-                    <a href="/calendar/index/<?= $calendar->previousSixMonth()->month; ?>/<?= $calendar->previousSixMonth()->year; ?>" class="btn btn-outline-dark btn-sm mx-1" role="button"><i class="fas fa-arrow-circle-left"></i></a>
+                    <a href="/calendar/index/<?= $calendar->previousSixMonth()->month; ?>/<?= $calendar->previousSixMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-circle-left"></i></a>
                     <a href="/calendar/index/<?= $calendar->previousMonth()->month; ?>/<?= $calendar->previousMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-left"></i></a>
-                    <a href="/calendar/index/<?= $calendar->nextMonth()->month; ?>/<?= $calendar->nextMonth()->year; ?>" class="btn btn-outline-dark btn-sm mx-1" role="button"><i class="fas fa-arrow-right"></i></a>
+                    <a href="/calendar/index/<?= $calendar->nextMonth()->month; ?>/<?= $calendar->nextMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-right"></i></a>
                     <a href="/calendar/index/<?= $calendar->nextSixMonth()->month; ?>/<?= $calendar->nextSixMonth()->year; ?>" class="btn btn-outline-dark btn-sm" role="button"><i class="fas fa-arrow-circle-right"></i></a>
-                    <a href="/Events/index" class="btn btn-dark btn-sm mx-2" role="button" title="Vue Liste"><i class="fas fa-list"></i></a>
+                    <a href="/Events/index/1" class="btn btn-dark btn-sm" role="button" title="Vue Liste"><i class="fas fa-list"></i></a>
                     <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#ajoutEvent" title="Ajouter un Evènement"><i class="fas fa-plus"></i></button>
                 </div>
             </div>
@@ -35,7 +35,7 @@ if (isset($_GET) && !empty($_GET)) {
                                 <?php endif; ?>
                                 <div class="calendar_day fw-bold"><?= $date->format('d'); ?></div>
                                 <?php foreach ($eventsForDay as $event) : ?>
-                                    <div class="calendar_event" style="background-color: <?= $event->color ?>;">
+                                    <div class="calendar_event" style="background-color: <?= $event->bg_color; ?>;">
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modifyEvent" data-bs-idModify="<?= $event->id ?>" data-bs-subjectModify="<?= $event->title ?>" data-bs-descriptionModify="<?= $event->description ?>" data-bs-locationModify="<?= $event->location ?>" data-bs-dateModify="<?= strftime('%x', strtotime($event->date)) ?>" data-bs-hourModify="<?= strftime('%R', strtotime($event->date)) ?>">
                                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<b><?= strftime('%x %R', strtotime($event->date)) ?></b><br><b><?= $event->title; ?></b><br><b>Lieu:</b> <?= $event->location ?> <br> <b>Description:</b> <?= $event->description ?>">
                                                 <?= (new DateTime($event->date))->format('H:i') ?>&ensp;<?= $event->title; ?>
@@ -73,16 +73,16 @@ if (isset($_GET) && !empty($_GET)) {
                     <input type="text" class="form-control form-control-sm text-dark bg-light" name="date" placeholder="Date (jj/mm/AAAA)" pattern="^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required>
                     <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="hour" placeholder="Heure (hh:mm)" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" required>
                     <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" name="description" placeholder="Description"></textarea>
-                    <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="color">
+                    <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">
                         <option selected>Couleur de fond :</option>
-                        <option class="bg-blanc" value="#FFFFFF">Blanc (défaut)</option>
-                        <option class="bg-bleu" value="#9AEDFF">Bleu</option>
-                        <option class="bg-gris" value="#BBBBBB">Gris</option>
-                        <option class="bg-jaune" value="#FFFFAC">Jaune</option>
-                        <option class="bg-rouge" value="#FFAC9A">Rouge</option>
-                        <option class="bg-rose" value="#F2B0EC">Rose</option>
-                        <option class="bg-vert" value="#B0F2B6">Vert</option>
-                        <option class="bg-violet" value="#ACACFF">Violet</option>
+                        <option class="bg-white" value="#FFFFFF">Blanc (défaut)</option>
+                        <option class="bg-blue" value="#9AEDFF">Bleu</option>
+                        <option class="bg-grey" value="#BBBBBB">Gris</option>
+                        <option class="bg-yellow" value="#FFFFAC">Jaune</option>
+                        <option class="bg-red" value="#FFAC9A">Rouge</option>
+                        <option class="bg-pink" value="#F2B0EC">Rose</option>
+                        <option class="bg-green" value="#B0F2B6">Vert</option>
+                        <option class="bg-purple" value="#ACACFF">Violet</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -119,16 +119,16 @@ if (isset($_GET) && !empty($_GET)) {
                         <div class="modal-body4">
                             <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" placeholder="Description" name="description" required></textarea>
                         </div>
-                        <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="color">
+                        <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">
                             <option selected>Couleur de fond :</option>
-                            <option class="bg-blanc" value="#FFFFFF">Blanc (défaut)</option>
-                            <option class="bg-bleu" value="#9AEDFF">Bleu</option>
-                            <option class="bg-gris" value="#BBBBBB">Gris</option>
-                            <option class="bg-jaune" value="#FFFFAC">Jaune</option>
-                            <option class="bg-rouge" value="#FFAC9A">Rouge</option>
-                            <option class="bg-rose" value="#F2B0EC">Rose</option>
-                            <option class="bg-vert" value="#B0F2B6">Vert</option>
-                            <option class="bg-violet" value="#ACACFF">Violet</option>
+                            <option class="bg-white" value="#FFFFFF">Blanc (défaut)</option>
+                            <option class="bg-blue" value="#9AEDFF">Bleu</option>
+                            <option class="bg-grey" value="#BBBBBB">Gris</option>
+                            <option class="bg-yellow" value="#FFFFAC">Jaune</option>
+                            <option class="bg-red" value="#FFAC9A">Rouge</option>
+                            <option class="bg-pink" value="#F2B0EC">Rose</option>
+                            <option class="bg-green" value="#B0F2B6">Vert</option>
+                            <option class="bg-purple" value="#ACACFF">Violet</option>
                         </select>
                         <div class="modal-body5">
                             <input type="hidden" class="form-control form-control-sm text-dark bg-light my-2" name="id">

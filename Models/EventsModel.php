@@ -9,7 +9,7 @@ class EventsModel extends Model
     protected $date;
     protected $location;
     protected $description;
-    protected $color;
+    protected $bg_color;
 
     public function __construct()
     {
@@ -116,22 +116,23 @@ class EventsModel extends Model
         return $this;
     }
 
+
     /**
-     * Get the value of color
+     * Get the value of bg_color
      */ 
-    public function getColor()
+    public function getBg_color()
     {
-        return $this->color;
+        return $this->bg_color;
     }
 
     /**
-     * Set the value of color
+     * Set the value of bg_color
      *
      * @return  self
      */ 
-    public function setColor($color)
+    public function setBg_color($bg_color)
     {
-        $this->color = $color;
+        $this->bg_color = $bg_color;
 
         return $this;
     }

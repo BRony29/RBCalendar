@@ -1,4 +1,16 @@
-<?php $_SESSION['redirect'] = '/events/index'; ?>
+<?php
+if (isset($_GET) && !empty($_GET)){
+    $params = explode('/', $_GET['p']);
+    if (isset($params[2]) && $params[2] > 1) {
+        $params[2] = intval($params[2]);
+        $middlePage = $params[2];
+    } else {
+        $params[2] = 1;
+        $middlePage = 2;
+    }
+}
+$_SESSION['redirect'] = '/Events/index/'. $params[2];
+?>
 
 <section id="events" class="container">
     <div class="row">
@@ -21,17 +33,17 @@
                 </thead>
                 <tbody>
                     <?php foreach ($eventsList as $event) : ?>
-                        <tr style="background-color: <?= $event->color ?>;">
+                        <tr class="border-top border-dark" style="background-color: <?= $event->bg_color; ?>;">
                             <td>
                                 <a href="" class="btn btn-outline-dark btn-xs mx-2" data-bs-toggle="modal" data-bs-target="#modifyEvent" data-bs-idModify="<?= $event->id ?>" data-bs-subjectModify="<?= $event->title ?>" data-bs-descriptionModify="<?= $event->description ?>" data-bs-locationModify="<?= $event->location ?>" data-bs-dateModify="<?= strftime('%x', strtotime($event->date)) ?>" data-bs-hourModify="<?= strftime('%R', strtotime($event->date)) ?>">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <?= $event->title; ?>
+                                <span class="fst-italic fw-bold text-uppercase mx-1"><?= $event->title; ?></span>
                             </td>
                             <td><?= strftime('%x %R', strtotime($event->date)) ?></td>
                             <td><?= $event->location; ?></td>
                         </tr>
-                        <tr style="background-color: <?= $event->color ?>;">
+                        <tr class="border-bottom border-dark" style="background-color: <?= $event->bg_color ?>;">
                             <td colspan="3">
                                 <span class="ms-5 fw-bold">Description:</span> <?= $event->description; ?>
                             </td>
@@ -39,6 +51,32 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-sm justify-content-end me-2">
+                    <li class="page-item">
+                        <a class="page-link" href="<?= ('/Events/index/'. ($middlePage - 5)) ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="<?= ('/Events/index/'. ($middlePage - 1)) ?>"><?= $middlePage - 1; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?= ('/Events/index/'. $middlePage) ?>"><?= $middlePage; ?></a></li>
+                    <li class="page-item"><a class="page-link" href="<?= ('/Events/index/'. ($middlePage + 1)) ?>"><?= $middlePage + 1; ?></a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= ('/Events/index/'. ($middlePage + 4)) ?>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+        <div class="row my-3">
+            <div class="col-sm-10">
+                <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
+                    <p class="text-danger fw-bold"><?= $_SESSION['error'] ?></p>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
@@ -57,16 +95,16 @@
                     <input type="text" class="form-control form-control-sm text-dark bg-light" name="date" placeholder="Date (jj/mm/AAAA)" pattern="^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required>
                     <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="hour" placeholder="Heure (hh:mm)" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" required>
                     <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" name="description" placeholder="Description"></textarea>
-                    <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="color">
+                    <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">
                         <option selected>Couleur de fond :</option>
-                        <option class="bg-blanc" value="#FFFFFF">Blanc (défaut)</option>
-                        <option class="bg-bleu" value="#9AEDFF">Bleu</option>
-                        <option class="bg-gris" value="#BBBBBB">Gris</option>
-                        <option class="bg-jaune" value="#FFFFAC">Jaune</option>
-                        <option class="bg-rouge" value="#FFAC9A">Rouge</option>
-                        <option class="bg-rose" value="#F2B0EC">Rose</option>
-                        <option class="bg-vert" value="#B0F2B6">Vert</option>
-                        <option class="bg-violet" value="#ACACFF">Violet</option>
+                        <option class="bg-white" value="#FFFFFF">Blanc (défaut)</option>
+                        <option class="bg-blue" value="#9AEDFF">Bleu</option>
+                        <option class="bg-grey" value="#BBBBBB">Gris</option>
+                        <option class="bg-yellow" value="#FFFFAC">Jaune</option>
+                        <option class="bg-red" value="#FFAC9A">Rouge</option>
+                        <option class="bg-pink" value="#F2B0EC">Rose</option>
+                        <option class="bg-green" value="#B0F2B6">Vert</option>
+                        <option class="bg-purple" value="#ACACFF">Violet</option>
                     </select>
                 </div>
                 <div class="modal-footer">
@@ -103,16 +141,16 @@
                         <div class="modal-body4">
                             <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" placeholder="Description" name="description" required></textarea>
                         </div>
-                        <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="color">
+                        <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">
                             <option selected>Couleur de fond :</option>
-                            <option class="bg-blanc" value="#FFFFFF">Blanc (défaut)</option>
-                            <option class="bg-bleu" value="#9AEDFF">Bleu</option>
-                            <option class="bg-gris" value="#BBBBBB">Gris</option>
-                            <option class="bg-jaune" value="#FFFFAC">Jaune</option>
-                            <option class="bg-rouge" value="#FFAC9A">Rouge</option>
-                            <option class="bg-rose" value="#F2B0EC">Rose</option>
-                            <option class="bg-vert" value="#B0F2B6">Vert</option>
-                            <option class="bg-violet" value="#ACACFF">Violet</option>
+                            <option class="bg-white" value="#FFFFFF">Blanc (défaut)</option>
+                            <option class="bg-blue" value="#9AEDFF">Bleu</option>
+                            <option class="bg-grey" value="#BBBBBB">Gris</option>
+                            <option class="bg-yellow" value="#FFFFAC">Jaune</option>
+                            <option class="bg-red" value="#FFAC9A">Rouge</option>
+                            <option class="bg-pink" value="#F2B0EC">Rose</option>
+                            <option class="bg-green" value="#B0F2B6">Vert</option>
+                            <option class="bg-purple" value="#ACACFF">Violet</option>
                         </select>
                         <div class="modal-body5">
                             <input type="hidden" class="form-control form-control-sm text-dark bg-light my-2" name="id">

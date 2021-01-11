@@ -3,10 +3,6 @@ body {
     font-family: 'Noto Sans', sans-serif;
 }
 
-#events {
-    min-height: calc(100vh - 200px);
-}
-
 
 /* ***** Classes généralistes ***** */
 
@@ -14,35 +10,35 @@ body {
     resize: none;
 }
 
-.bg-blanc {
+.bg-white {
     background-color: #FFFFFF;
 }
 
-.bg-bleu {
+.bg-blue {
     background-color: #9AEDFF;
 }
 
-.bg-gris {
-    background-color: #BBBBBB;
+.bg-grey {
+    background-color: #AAAAAA;
 }
 
-.bg-jaune {
+.bg-yellow {
     background-color: #FFFFAC;
 }
 
-.bg-rouge {
+.bg-red {
     background-color: #FFAC9A;
 }
 
-.bg-rose {
+.bg-pink {
     background-color: #F2B0EC;
 }
 
-.bg-vert {
+.bg-green {
     background-color: #B0F2B6;
 }
 
-.bg-violet {
+.bg-purple {
     background-color: #ACACFF;
 }
 
@@ -51,7 +47,7 @@ body {
 
 .btn-group-xs>.btn,
 .btn-xs {
-    padding: .25rem .25rem;
+    padding: .20rem .20rem;
     font-size: .875rem;
     line-height: .5;
     border-radius: .2rem;
@@ -71,6 +67,8 @@ body {
 .calendar_table {
     width: 100%;
     height: calc(100vh - 300px);
+    /* background-color: #EEE; */
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .calendar_table td {
@@ -84,7 +82,8 @@ body {
 }
 
 .calendar_table td:hover {
-    background-color: #DDD;
+    background-color: #AAA;
+    color: #000;
 }
 
 .calendar_table.calendar_table--6weeks td {
@@ -100,7 +99,7 @@ body {
 }
 
 .calendar_othermonth .calendar_day {
-    opacity: 0.3;
+    opacity: 0.4;
 }
 
 .calendar_event {
@@ -113,7 +112,8 @@ body {
 }
 
 .calendar_today {
-    background-color: #EEE;
+    background-color: #444;
+    color: #FFF;
 }
 
 @media screen and (max-device-width: 991.98px) {
@@ -137,5 +137,45 @@ body {
     }
     .calendar_event {
         font-size: 0.3em;
+    }
+    #calendar h5 {
+        font-size: 1em;
+    }
+}
+
+
+/* ***** events ***** */
+
+#events {
+    min-height: calc(100vh - 200px);
+    font-size: 1em;
+}
+
+#events td {
+    border: none;
+}
+
+@media screen and (max-device-width: 991.98px) {
+    #events {
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-device-width: 767.98px) {
+    #events {
+        font-size: 0.6em;
+    }
+}
+
+
+/* ***** footer ***** */
+
+#footer {
+    font-size: 0.9em;
+}
+
+@media screen and (max-device-width: 767.98px) {
+    #footer {
+        font-size: 0.8em;
     }
 }

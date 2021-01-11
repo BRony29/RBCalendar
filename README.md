@@ -12,3 +12,4 @@ Features :
 - Event background color.
 - Bootstrap 5 Tooltips to see events details.
 - Two différents views:  Calendar and Events List (Bootstrap 5 Table).
+- Events List: Pagination, 10 events per page sorted by date and time.

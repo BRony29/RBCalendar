@@ -40,6 +40,17 @@ class Model extends Db
         return $query->fetchAll();
     }
 
+    /**
+     * Sélection de tous les enregistrements d'une table rangés par date décroissante
+     * @return array Tableau des enregistrements trouvés
+     */
+    public function findAllDateDesc()
+    {
+        $query = $this->requete("SELECT * FROM {$this->table} ORDER BY date DESC");
+        return $query->fetchAll();
+    }
+
+
 
     /**
      * Sélection de plusieurs enregistrements suivant un tableau de critères

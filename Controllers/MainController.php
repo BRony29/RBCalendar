@@ -13,7 +13,8 @@ class MainController extends Controller
 
     public function error404()
     {
-        $this->render('main/error404');
+        $_SESSION['error'] = 'Erreur 404. Cette page n\'existe pas !';
+        header('location: /calendar/index');
     }
 
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RBCalendar</title>
     <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/bootstrap.min.css">
     <link rel="stylesheet" href="/public/css/style.css">
 
     <script src="/public/js/all.min.js"></script>
