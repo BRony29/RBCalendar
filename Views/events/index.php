@@ -18,7 +18,7 @@ $_SESSION['redirect'] = '/Events/index/'. $params[2];
             <div class="d-flex flex-row align-items-center justify-content-between mx-2">
                 <h5>Liste des évènements</h5>
                 <div>
-                    <a href="/calendar/index" class="btn btn-dark btn-sm mx-2" role="button" title="Vue Calendar"><i class="far fa-calendar"></i></a>
+                    <a href="/calendar/index" class="btn btn-dark btn-sm me-1" role="button" title="Vue Calendar"><i class="far fa-calendar"></i></a>
                     <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#ajoutEvent" title="Ajouter un Evènement"><i class="fas fa-plus"></i></button>
                 </div>
             </div>

@@ -33,9 +33,10 @@ if (isset($_GET) && !empty($_GET)) {
                                 <?php if ($i === 0) : ?>
                                     <div class="calendar_weekday fw-bold"><?= $day; ?></div>
                                 <?php endif; ?>
-                                <div class="calendar_day fw-bold"><?= $date->format('d'); ?></div>
+                                <span class="calendar_day fw-bold"><?= $date->format('d'); ?></span>
+                                <a href="" class="text-decoration-none text-dark smNoDisplay" data-bs-toggle="modal" data-bs-target="#ajoutEvent2" data-bs-dateModify="<?= ($date->format('d/m/Y')) ?>" title="Ajouter un Evènement"><i class="fas fa-plus-circle ms-1"></i></a>
                                 <?php foreach ($eventsForDay as $event) : ?>
-                                    <div class="calendar_event" style="background-color: <?= $event->bg_color; ?>;">
+                                    <div class="calendar_event border-top border-secondary" style="background-color: <?= $event->bg_color; ?>;">
                                         <a href="" data-bs-toggle="modal" data-bs-target="#modifyEvent" data-bs-idModify="<?= $event->id ?>" data-bs-subjectModify="<?= $event->title ?>" data-bs-descriptionModify="<?= $event->description ?>" data-bs-locationModify="<?= $event->location ?>" data-bs-dateModify="<?= strftime('%x', strtotime($event->date)) ?>" data-bs-hourModify="<?= strftime('%R', strtotime($event->date)) ?>">
                                             <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true" title="<b><?= strftime('%x %R', strtotime($event->date)) ?></b><br><b><?= $event->title; ?></b><br><b>Lieu:</b> <?= $event->location ?> <br> <b>Description:</b> <?= $event->description ?>">
                                                 <?= (new DateTime($event->date))->format('H:i') ?>&ensp;<?= $event->title; ?>
@@ -71,6 +72,43 @@ if (isset($_GET) && !empty($_GET)) {
                     <input type="text" class="form-control form-control-sm text-dark bg-light" name="title" placeholder="Type d'évènement" required>
                     <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="location" placeholder="Lieu" required>
                     <input type="text" class="form-control form-control-sm text-dark bg-light" name="date" placeholder="Date (jj/mm/AAAA)" pattern="^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required>
+                    <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="hour" placeholder="Heure (hh:mm)" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" required>
+                    <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" name="description" placeholder="Description"></textarea>
+                    <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">
+                        <option selected>Couleur de fond :</option>
+                        <option class="bg-white" value="#FFFFFF">Blanc (défaut)</option>
+                        <option class="bg-blue" value="#9AEDFF">Bleu</option>
+                        <option class="bg-grey" value="#BBBBBB">Gris</option>
+                        <option class="bg-yellow" value="#FFFFAC">Jaune</option>
+                        <option class="bg-red" value="#FFAC9A">Rouge</option>
+                        <option class="bg-pink" value="#F2B0EC">Rose</option>
+                        <option class="bg-green" value="#B0F2B6">Vert</option>
+                        <option class="bg-purple" value="#ACACFF">Violet</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary btn-sm">Valider</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal ajout d'un évènement avec date pré-remplie -->
+    <div class="modal fade" id="ajoutEvent2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <form action="/Events/addEvents" method="POST" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter un évènement.</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="honeyPot">
+                    <input type="text" class="form-control form-control-sm text-dark bg-light" name="title" placeholder="Type d'évènement" required>
+                    <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="location" placeholder="Lieu" required>
+                    <div class="info">
+                        <input type="text" class="form-control form-control-sm text-dark bg-light" name="date" placeholder="Date (jj/mm/AAAA)" pattern="^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required>
+                    </div>
                     <input type="text" class="form-control form-control-sm text-dark bg-light my-2" name="hour" placeholder="Heure (hh:mm)" pattern="^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" required>
                     <textarea class="form-control form-control-sm text-dark bg-light noresize" rows="5" name="description" placeholder="Description"></textarea>
                     <select class="form-select form-select-sm text-dark bg-light my-2" aria-label="Default select example" name="bg_color">

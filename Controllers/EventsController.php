@@ -6,7 +6,6 @@ use RBCalendar\Models\EventsModel;
 
 class EventsController extends Controller
 {
-
     public function index()
     {
         if (isset($_GET) && !empty($_GET)) {

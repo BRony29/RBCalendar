@@ -1,31 +1,12 @@
-/* Modal Bootstrap 5 de visualisation des events */
+/* Modal Bootstrap 5 d'ajout d'un évent avec date pré remplie */
 
-// var viewEvent = document.getElementById('viewEvent')
-// viewEvent.addEventListener('show.bs.modal', function(event) {
-//     var button = event.relatedTarget
-//     var subjectView = button.getAttribute('data-bs-subjectView')
-//     var descriptionView = button.getAttribute('data-bs-descriptionView')
-//     var locationView = button.getAttribute('data-bs-locationView')
-//     var dateView = button.getAttribute('data-bs-dateView')
-//     var modalBody0Input = viewEvent.querySelector('.modal-body0 input')
-//     modalBody0Input.value = subjectView
-//     var modalBody1Input = viewEvent.querySelector('.modal-body1 input')
-//     modalBody1Input.value = locationView
-//     var modalBody2Input = viewEvent.querySelector('.modal-body2 input')
-//     modalBody2Input.value = dateView
-//     var modalBody3Input = viewEvent.querySelector('.modal-body3 textarea')
-//     modalBody3Input.value = descriptionView
-// })
-
-/* Modal Bootstrap 5 de suppression d'un event */
-
-// var deleteEvent = document.getElementById('deleteEvent')
-// deleteEvent.addEventListener('show.bs.modal', function(event) {
-//     var button = event.relatedTarget
-//     var deleteEvents = button.getAttribute('data-bs-deleteEvents')
-//     var modalBodyInput = deleteEvent.querySelector('.modal-body input')
-//     modalBodyInput.value = deleteEvents
-// })
+var ajoutEvent = document.getElementById('ajoutEvent2')
+ajoutEvent.addEventListener('show.bs.modal', function(event) {
+    var button = event.relatedTarget
+    var ajoutEvents = button.getAttribute('data-bs-dateModify')
+    var modalBodyInput = ajoutEvent.querySelector('.info input')
+    modalBodyInput.value = ajoutEvents
+})
 
 /* Modal Bootstrap 5 de modification et de suppression d'un events */
 

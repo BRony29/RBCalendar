@@ -67,7 +67,6 @@ body {
 .calendar_table {
     width: 100%;
     height: calc(100vh - 300px);
-    /* background-color: #EEE; */
     background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -82,8 +81,7 @@ body {
 }
 
 .calendar_table td:hover {
-    background-color: #AAA;
-    color: #000;
+    background-color: #CCC;
 }
 
 .calendar_table.calendar_table--6weeks td {
@@ -95,7 +93,8 @@ body {
 }
 
 .calendar_day {
-    font-size: 0.9em;
+    font-size: 1em;
+    color: #000000;
 }
 
 .calendar_othermonth .calendar_day {
@@ -112,16 +111,16 @@ body {
 }
 
 .calendar_today {
-    background-color: #444;
+    background-color: #AAA;
     color: #FFF;
 }
 
 @media screen and (max-device-width: 991.98px) {
     .calendar_table td {
-        padding: 10px 5px 10px 5px;
+        padding: 5px;
     }
     .calendar_weekday {
-        font-size: 0.6em;
+        font-size: 0.7em;
     }
     .calendar_event {
         font-size: 0.5em;
@@ -129,8 +128,11 @@ body {
 }
 
 @media screen and (max-device-width: 767.98px) {
+    .calendar_table td {
+        padding: 2px;
+    }
     .calendar_weekday {
-        font-size: 0.3em;
+        font-size: 0.4em;
     }
     .calendar_day {
         font-size: 0.7em;
@@ -140,6 +142,9 @@ body {
     }
     #calendar h5 {
         font-size: 1em;
+    }
+    .smNoDisplay {
+        display: none;
     }
 }
 
