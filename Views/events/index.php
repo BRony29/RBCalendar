@@ -75,6 +75,7 @@ $_SESSION['redirect'] = '/Events/index/'. $params[2];
             <div class="col-sm-10">
                 <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
                     <p class="text-danger fw-bold"><?= $_SESSION['error'] ?></p>
+                    <?php $_SESSION['error'] = '' ?>
                 <?php endif; ?>
             </div>
         </div>
@@ -175,4 +176,7 @@ $_SESSION['redirect'] = '/Events/index/'. $params[2];
             </div>
         </div>
     </div>
+
+    <!-- Modal inutilisée, compatibilité avec /calendar/index -->
+    <div class="modal fade" id="ajoutEvent2" tabindex="-1" role="dialog" aria-hidden="true"></div>
 </section>

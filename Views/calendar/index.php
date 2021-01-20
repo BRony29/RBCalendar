@@ -54,6 +54,7 @@ if (isset($_GET) && !empty($_GET)) {
             <div class="col-sm-10">
                 <?php if (isset($_SESSION['error']) && !empty($_SESSION['error'])) : ?>
                     <p class="text-danger fw-bold"><?= $_SESSION['error'] ?></p>
+                    <?php $_SESSION['error'] = '' ?>
                 <?php endif; ?>
             </div>
         </div>
