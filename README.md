@@ -7,6 +7,7 @@ I'm studying and this is my very first app.
 Technical features :
 - MVC Architecture.
 - Object Oriented Programming php.
+- HTML5, CSS3 & SASS.
 - Framework Bootstrap 5.
 - Library Font Awesome.
 - Responsive Design.

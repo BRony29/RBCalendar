@@ -1,0 +1,9 @@
+.btn-group-xs {
+    &>.btn {
+        @include btn
+    }
+}
+
+.btn-xs {
+    @include btn
+}

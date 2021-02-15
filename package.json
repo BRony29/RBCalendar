@@ -1,0 +1,19 @@
+{
+    "name": "rbcalendar",
+    "version": "6.0.0",
+    "description": "Calendrier permettant de gérer des évènements, codé en php MVC & POO. Utilisation de Modal Boostrap 5.",
+    "main": "index.js",
+    "scripts": {
+        "sass": "sass --watch /public/css/style.scss:/public/css/style.css --style expanded"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BRony29/RBCalendar.git"
+    },
+    "author": "Bégoc Ronald",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/BRony29/RBCalendar/issues"
+    },
+    "homepage": "https://github.com/BRony29/RBCalendar#readme"
+}

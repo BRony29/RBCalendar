@@ -12,7 +12,7 @@ if (isset($_GET) && !empty($_GET)){
 $_SESSION['redirect'] = '/Events/index/'. $params[2];
 ?>
 
-<section id="events" class="container">
+<section class="container events">
     <div class="row">
         <div class="col-sm-12 my-auto px-0">
             <div class="d-flex flex-row align-items-center justify-content-between mx-2">

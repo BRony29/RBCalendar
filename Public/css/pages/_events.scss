@@ -1,0 +1,13 @@
+.events {
+    min-height: calc(100vh - 200px);
+    font-size: 1em;
+    td {
+        border: none;
+    }
+    @media screen and (max-device-width: 991.98px) {
+        font-size: 0.9em;
+    }
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 0.6em;
+    }
+}

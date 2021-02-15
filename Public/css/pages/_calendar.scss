@@ -1,0 +1,86 @@
+.calendar_table {
+    width: 100%;
+    height: calc(100vh - 280px);
+    background-color: rgba(0, 0, 0, 0.1);
+    td {
+        padding: 5px;
+        border: 1px solid #000;
+        vertical-align: top;
+        width: 14.29%;
+        height: 20%;
+        transition-property: background-color;
+        transition-duration: 0.5s;
+        &:hover {
+            background-color: #CCC;
+        }
+        @media screen and (max-device-width: 991.98px) {
+            padding: 5px;
+        }
+        @media screen and (max-device-width: 767.98px) {
+            padding: 2px;
+        }
+    }
+    .calendar_table--6weeks {
+        td {
+            height: 16.66%;
+        }
+    }
+}
+
+.calendar_weekday {
+    font-size: 0.8em;
+    @media screen and (max-device-width: 991.98px) {
+        font-size: 0.7em;
+    }
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 0.4em;
+    }
+}
+
+.calendar_day {
+    font-size: 1em;
+    color: #000000;
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 0.7em;
+    }
+}
+
+.calendar_othermonth {
+    .calendar_day {
+        opacity: 0.4;
+    }
+}
+
+.calendar_event {
+    font-size: 0.6em;
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 0.3em;
+    }
+}
+
+.calendar_event {
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+    @media screen and (max-device-width: 991.98px) {
+        font-size: 0.5em;
+    }
+}
+
+.calendar_today {
+    background-color: #AAA;
+    color: #FFF;
+}
+
+#calendar h5 {
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 1em;
+    }
+}
+
+.smNoDisplay {
+    @media screen and (max-device-width: 767.98px) {
+        display: none;
+    }
+}

@@ -1,0 +1,9 @@
+.footer {
+    font-size: 1em;
+    @media screen and (max-device-width: 991.98px) {
+        font-size: 0.9em;
+    }
+    @media screen and (max-device-width: 767.98px) {
+        font-size: 0.8em;
+    }
+}
