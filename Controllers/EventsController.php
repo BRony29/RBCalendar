@@ -8,19 +8,15 @@ class EventsController extends Controller
 {
     public function index()
     {
-        if (isset($_GET) && !empty($_GET)) {
             $params = explode('/', $_GET['p']);
             if (isset($params[2]) && $params[2] > 1) {
                 $params[2] = intval($params[2]);
             } else {
                 $params[2] = 1;
             }
-        }
         $eventsModel = new EventsModel;
         $fullEventsList = $eventsModel->findAllDateDesc();
-        $startList =  10 * $params[2] - 10;
-        $endList = 10 * $params[2];
-        $eventsList = array_slice($fullEventsList, $startList, $endList);
+        $eventsList = array_slice($fullEventsList, 10 * $params[2] - 10, 10);
         $this->render('events/index', compact('eventsList'));
         exit;
     }

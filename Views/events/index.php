@@ -9,6 +9,10 @@ if (isset($_GET) && !empty($_GET)){
         $middlePage = 2;
     }
 }
+$startPage = $middlePage - 5;
+if ($startPage < 1) {
+    $startPage = 1;
+}
 $_SESSION['redirect'] = '/Events/index/'. $params[2];
 ?>
 
@@ -52,10 +56,10 @@ $_SESSION['redirect'] = '/Events/index/'. $params[2];
                 </tbody>
             </table>
 
-            <nav aria-label="Page navigation example">
+            <nav>
                 <ul class="pagination pagination-sm justify-content-end me-2">
                     <li class="page-item">
-                        <a class="page-link" href="<?= ('/Events/index/'. ($middlePage - 5)) ?>" aria-label="Previous">
+                        <a class="page-link" href="<?= ('/Events/index/'. $startPage) ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -63,7 +67,7 @@ $_SESSION['redirect'] = '/Events/index/'. $params[2];
                     <li class="page-item"><a class="page-link" href="<?= ('/Events/index/'. $middlePage) ?>"><?= $middlePage; ?></a></li>
                     <li class="page-item"><a class="page-link" href="<?= ('/Events/index/'. ($middlePage + 1)) ?>"><?= $middlePage + 1; ?></a></li>
                     <li class="page-item">
-                        <a class="page-link" href="<?= ('/Events/index/'. ($middlePage + 4)) ?>" aria-label="Next">
+                        <a class="page-link" href="<?= ('/Events/index/'. ($middlePage + 5)) ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
